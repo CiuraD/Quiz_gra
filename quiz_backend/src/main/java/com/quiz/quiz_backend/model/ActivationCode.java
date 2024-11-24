@@ -8,7 +8,7 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "kody_aktywacyjne")
+@Table(name = "kody_aktywacji")
 public class ActivationCode {
 
     @Id

@@ -8,7 +8,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "tabela_wynikow")
+@Table(name = "tablica_wynikow")
 public class ScoreTable {
 
     @Id
@@ -19,8 +19,12 @@ public class ScoreTable {
     private int score;
 
     @ManyToOne
-    @JoinColumn(name = "id_uzytkownika")
+    @JoinColumn(name = "id_uzytkownika", nullable = false)
     private User user;
+
+    public User getUser() {
+        return user;
+    }
 
     public int getScoreId() {
         return scoreId;
@@ -30,19 +34,11 @@ public class ScoreTable {
         return score;
     }
 
-    public User getUser() {
-        return user;
-    }
-
     public void setScoreId(int scoreId) {
         this.scoreId = scoreId;
     }
 
     public void setScore(int score) {
         this.score = score;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 }

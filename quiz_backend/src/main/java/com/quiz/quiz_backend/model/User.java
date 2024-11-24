@@ -1,7 +1,8 @@
 package com.quiz.quiz_backend.model;
 
-import java.util.List;
+import java.util.Set;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -11,7 +12,7 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "uzytkownik")
+@Table(name = "uzytkownicy")
 public class User {
 
     @Id
@@ -32,11 +33,13 @@ public class User {
 
     @OneToOne
     @JoinColumn(name = "id_uzytkownika")
-    private ActivationCode activationCode;
+    private ActivationCode activationCode; 
 
-    @OneToMany
-    @JoinColumn(name = "id_uzytkownika")
-    private List<ScoreTable> scoreTable;
+    @OneToMany(targetEntity=com.quiz.quiz_backend.model.ScoreTable.class, cascade=CascadeType.ALL,
+                mappedBy="user")
+    private Set<ScoreTable> scores;
+
+    public Set<ScoreTable> getScores() { return scores; }
 
     public int getUserId() {
         return userId;
@@ -62,11 +65,6 @@ public class User {
         return activationCode;
     }
 
-    public List<ScoreTable> getScoreTable() {
-        return scoreTable;
-    }
-
-
     public void setUserId(int userId) {
         this.userId = userId;
     }
@@ -85,13 +83,5 @@ public class User {
 
     public void setActivated(boolean activated) {
         this.activated = activated;
-    }
-
-    public void setActivationCode(ActivationCode activationCode) {
-        this.activationCode = activationCode;
-    }
-
-    public void setScoreTable(List<ScoreTable> scoreTable) {
-        this.scoreTable = scoreTable;
     }
 }
