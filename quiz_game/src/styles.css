@@ -1,0 +1,8 @@
+/* You can add global styles to this file, and also import other style files */
+.background-image {
+    background-image: url('./app/resources/back.png');
+    background-size: cover;
+    background-position: center;
+  }
+  * { margin: 0;
+  padding: 0;}
