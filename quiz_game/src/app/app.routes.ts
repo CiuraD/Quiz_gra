@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './screens/login/login.component';
-import { RegisterComponent } from './screens/register/register.component';
-import { AboutComponent } from './screens/about/about.component';
-import { MenuComponent } from './screens/menu/menu.component';
-import { GamescoreComponent } from './screens/gamescore/gamescore.component';
-import { GamescreenComponent } from './screens/gamescreen/gamescreen.component';
-import { ScoreboardComponent } from './screens/scoreboard/scoreboard.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
+import { AboutComponent } from './components/about/about.component';
+import { MenuComponent } from './components/menu/menu.component';
+import { GamescoreComponent } from './components/gamescore/gamescore.component';
+import { GamescreenComponent } from './components/gamescreen/gamescreen.component';
+import { ScoreboardComponent } from './components/scoreboard/scoreboard.component';
+import { EndgamescreenComponent } from './components/endgamescreen/endgamescreen.component';
 
 export const routes: Routes = [
 
@@ -17,7 +18,8 @@ export const routes: Routes = [
     { path: 'menu', component: MenuComponent },
     { path: 'gamescore', component: GamescoreComponent },
     { path: 'gamescreen', component: GamescreenComponent },
-    { path: 'scoreboard', component: ScoreboardComponent }
+    { path: 'scoreboard', component: ScoreboardComponent },
+    { path: 'endgamescreen', component: EndgamescreenComponent },
 ];
 
 @NgModule({

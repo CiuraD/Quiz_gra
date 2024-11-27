@@ -26,21 +26,6 @@
 }
 
 /* Header section */
-.login-header {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #6a4ec5e8;
-    color: white;
-    padding: 10px 20px;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-    position: fixed;
-}
-
-.login-header h1 {
-    font-family: 'Times New Roman', Times, serif;
-}
 
 .logo {
     display: flex;
