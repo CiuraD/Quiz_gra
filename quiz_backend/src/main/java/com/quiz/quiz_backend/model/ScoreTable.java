@@ -26,6 +26,10 @@ public class ScoreTable {
         return user;
     }
 
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     public int getScoreId() {
         return scoreId;
     }
