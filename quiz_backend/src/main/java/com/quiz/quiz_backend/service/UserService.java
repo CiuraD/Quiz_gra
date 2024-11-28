@@ -22,6 +22,4 @@ public class UserService {
         //TODO implement register logic
         return HttpStatus.OK;
     }
-
-
 }
