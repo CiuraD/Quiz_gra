@@ -7,4 +7,6 @@ import com.quiz.quiz_backend.model.User;
 
 @RepositoryRestResource
 public interface UserRepository extends JpaRepository<User, Integer>{
+
+    User findByLogin(String login);
 }
