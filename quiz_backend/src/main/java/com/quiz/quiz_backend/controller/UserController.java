@@ -1,5 +1,6 @@
 package com.quiz.quiz_backend.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,20 +14,23 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.quiz.quiz_backend.dto.LoginDTO;
 import com.quiz.quiz_backend.dto.RegisterDTO;
+import com.quiz.quiz_backend.service.UserService;
 
 @RestController
 @RequestMapping("/api/user")
 public class UserController {
+    @Autowired
+    UserService userService;
     
     @GetMapping("login")
     @ResponseBody
-    public String Login(@RequestParam LoginDTO loginDTO) {
+    public String login(@RequestParam LoginDTO loginDTO) {
         //return userService.Login(loginDTO);
-        return new String();
+        return userService.login(loginDTO);
     }
 
     @PostMapping("register")
-    public HttpStatus Register(@RequestBody RegisterDTO registerDTO) {
+    public HttpStatus register(@RequestBody RegisterDTO registerDTO) {
         //TODO: process POST request
         
         return HttpStatus.OK;
