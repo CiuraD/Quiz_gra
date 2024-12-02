@@ -1,0 +1,54 @@
+<div class="background-image">
+    <div class="header">
+        <div class="logo">
+            <img src="./src/resources/logo.png" alt="Logo" />
+        </div>
+        <h1>Register</h1>
+        <button class="logout-header-button" (click)="navigateToLogin()">Login</button>
+    </div>
+    <div class="register-container">
+
+        <div class="body">
+            <div class="register-form">
+                <form [formGroup]="registerForm" (ngSubmit)="handleSubmit()">
+                    <label for="nickname">Nick Name</label>
+                    <div class="input-container">
+                        <input type="text" id="nickname" formControlName="nickname" placeholder="Nick Name" />
+                        <div *ngIf="registerForm.get('nickname')?.invalid && (registerForm.get('nickname')?.touched || registerForm.get('nickname')?.dirty)"
+                            class="tooltip">
+                            <small *ngIf="registerForm.get('nickname')?.errors?.required">Nick Name is required.</small>
+                            <small *ngIf="registerForm.get('nickname')?.errors?.minLength">Nick Name is too short.</small>
+                        </div>
+                    </div>
+                    <label for="email">Email</label>
+                    <div class="input-container">
+                        <input type="email" id="email" formControlName="email" placeholder="E-mail" />
+                        <div *ngIf="registerForm.get('email')?.invalid && (registerForm.get('email')?.touched || registerForm.get('email')?.dirty)"
+                            class="tooltip">
+                            <small *ngIf="registerForm.get('email')?.errors?.required">Email is required.</small>
+                            <small *ngIf="registerForm.get('email')?.errors?.email">Invalid email format.</small>
+                        </div>
+                    </div>
+                    <label for="password">Password</label>
+                    <div class="input-container">
+                        <input type="password" id="password" formControlName="password" placeholder="Password" />
+                        <div *ngIf="registerForm.get('password')?.invalid && (registerForm.get('password')?.touched || registerForm.get('password')?.dirty)"
+                            class="tooltip">
+                            <small *ngIf="registerForm.get('password')?.errors?.pattern">Password pattern error TODO!.</small>
+                            <small *ngIf="registerForm.get('password')?.errors?.required">Password is required.</small>
+                        </div>
+                    </div>
+                    <label for="confirmPassword">Confirm Password</label>
+                    <div class="input-container">
+                        <input type="password" id="confirmPassword" formControlName="confirmPassword" placeholder="Confirm Password" />
+                        <div *ngIf="registerForm.get('confirmPassword')?.invalid && (registerForm.get('confirmPassword')?.touched || registerForm.get('confirmPassword')?.dirty)"
+                            class="tooltip">
+                            <small *ngIf="registerForm.get('confirmPassword')?.errors?.required">Confirm Password is required.</small>
+                        </div>
+                    </div>
+                    <button type="submit" class="register-button">Register</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

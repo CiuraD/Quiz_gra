@@ -1,0 +1,101 @@
+.body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    /* Flexbox for centering */
+    justify-content: center;
+    /* Center horizontally */
+    align-items: center;
+    /* Center vertically */
+    height: 100vh;
+    /* Full viewport height */
+    width: 100vw;
+    flex-direction: column;
+}
+
+.game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+.game-question {
+    background: linear-gradient(135deg, #1a5394, #aa151c);
+    display: flex;
+    width: 75vw;
+    margin: 5vh;
+    text-align: center;
+    font-size: 150%;
+    box-shadow: 4px 4px 4px;
+    border-radius: 25px;
+    border: solid 5px #107215;
+}
+/* Kontener przycisków */
+.game-button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px; /* Odstęp między wierszami */
+    width: 100%;
+}
+
+/* Kontener wiersza przycisków */
+.game-row-container {
+    display: flex;
+    justify-content: center;
+    gap: 15px; /* Odstęp między przyciskami */
+    width: 100%;
+}
+
+/* Styl przycisków */
+.game-button {
+    background: linear-gradient(135deg, #20067c, #8275ad);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    text-align: center;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.game-button:hover {
+    background-color: #5a3cb5;
+    transform: scale(1.15); /* Powiększenie przycisku przy najechaniu */
+}
+
+.game-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(106, 78, 197, 0.5);
+}
+.game-button-hint {
+    background: linear-gradient(135deg, #20067c, #8275ad);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    text-align: center;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+
+   
+    border-radius: 50px;
+}
+
+.game-button-hint:hover {
+    background-color: #5a3cb5;
+    transform: scale(1.15); /* Powiększenie przycisku przy najechaniu */
+}
+
+.game-button-hint:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(106, 78, 197, 0.5);
+}
