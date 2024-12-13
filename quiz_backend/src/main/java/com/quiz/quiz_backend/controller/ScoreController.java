@@ -19,12 +19,12 @@ public class ScoreController {
     @Autowired
     private ScoreService scoreService;
 
-    @GetMapping("/score/top")
+    @GetMapping("/top")
     public List<ScoreDTO> getTopScores() {
         return scoreService.getTopScores();
     }
 
-    @PostMapping("/score")
+    @PostMapping("")
     public HttpStatus addScore(@RequestBody ScoreDTO scoreDTO) {
         return scoreService.addScore(scoreDTO);
     }
