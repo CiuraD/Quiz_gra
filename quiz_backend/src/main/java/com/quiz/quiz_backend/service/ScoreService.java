@@ -29,7 +29,8 @@ public class ScoreService {
             scoreDTOList.add(new ScoreDTO(scoreTable.getUser().getLogin(), scoreTable.getScore()));
         }
         scoreDTOList.sort((a, b) -> b.getScore() - a.getScore());
-        scoreDTOList = scoreDTOList.subList(0, MAX_NUMBER_OF_SCORES);
+        int toIndex = Math.min(scoreDTOList.size(), MAX_NUMBER_OF_SCORES);
+        scoreDTOList = scoreDTOList.subList(0, toIndex);
         return scoreDTOList;
     }
 
