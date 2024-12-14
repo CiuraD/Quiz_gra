@@ -1,0 +1,85 @@
+/* You can add global styles to this file, and also import other style files */
+.background-image {
+  background-image: url('./resources/back.png');
+  background-size: cover;
+  background-position: center;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  background-color: #6a4ec5e8;
+  color: white;
+  padding: 10px 20px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  position: fixed;
+}
+
+.header h1 {
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.logout-header-button {
+  margin: 3vh;
+  position: relative;
+  width: 82px;
+  height: 36px;
+  background-color: #000;
+  display: flex;
+  align-items: center;
+  color: white;
+  flex-direction: column;
+  justify-content: center;
+  border: none;
+  padding: 12px;
+  gap: 12px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.logout-header-button::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  left: -4px;
+  top: -1px;
+  margin: auto;
+  width: 90px;
+  height: 45px;
+  border-radius: 10px;
+  background: linear-gradient(-45deg, #e81cff 0%, #40c9ff 100% );
+  z-index: -10;
+  pointer-events: none;
+  transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.logout-header-button::after {
+  content: "";
+  z-index: -1;
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(-45deg, #fc00ff 0%, #00dbde 100% );
+  transform: translate3d(0, 0, 0) scale(0.95);
+  filter: blur(20px);
+}
+
+.logout-header-button:hover::after {
+  filter: blur(30px);
+}
+
+.logout-header-button:hover::before {
+  transform: rotate(-180deg);
+}
+
+.logout-header-button:active::before {
+  scale: 0.7;
+}

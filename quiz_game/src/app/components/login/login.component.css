@@ -1,0 +1,127 @@
+/* Global styles for body */
+
+
+/* Main login container */
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+/* Body container */
+.body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    /* Flexbox for centering */
+    justify-content: center;
+    /* Center horizontally */
+    align-items: center;
+    /* Center vertically */
+    height: 100vh;
+    /* Full viewport height */
+    width: 100vw;
+}
+
+/* Header section */
+
+.logo {
+    display: flex;
+    align-items: center;
+    margin: 3vh;
+}
+
+.logo img {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+}
+
+.register-button {
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-right: 3vh;
+}
+
+.register-button:hover {
+    background-color: #555;
+}
+
+/* Login form section */
+.login-form {
+    background-color: white;
+    padding: 20px;
+    margin-top: 50px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    align-items: center;
+    text-align: center;
+}
+
+.login-form h1 {
+    color: #6a4ec5b0;
+    margin-bottom: 20px;
+}
+
+.login-form label {
+    display: block;
+    text-align: left;
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #333;
+}
+
+.login-form input {
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.sign-in-button {
+    background-color: #333;
+    color: white;
+    border: none;
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.sign-in-button:hover {
+    background-color: #555;
+}
+
+.input-container {
+    position: relative;
+    /* Umożliwia pozycjonowanie dymków */
+}
+
+.tooltip {
+    position: absolute;
+    background-color: rgba(255, 0, 0, 0.8);
+    /* Czerwony dymek */
+    color: white;
+    padding: 5px;
+    border-radius: 4px;
+    top: 100%;
+    /* Umieść dymek poniżej pola */
+    left: 0;
+    z-index: 10;
+    margin-top: 5px;
+    /* Odstęp od pola */
+    font-size: 12px;
+    /* Rozmiar czcionki */
+    white-space: nowrap;
+    /* Nie łamiemy tekstu */
+}
