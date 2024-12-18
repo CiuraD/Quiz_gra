@@ -1,23 +1,20 @@
 package com.quiz.quiz_backend.dto;
 
 public class LoginDTO {
-    private String username;
+    private String mail;
     private String password;
 
-    public LoginDTO() {
-    }
-
-    public LoginDTO(String username, String password) {
-        this.username = username;
+    public LoginDTO(String mail, String password) {
+        this.mail = mail;
         this.password = password;
     }
 
-    public String getUsername() {
-        return this.username;
+    public String getMail() {
+        return this.mail;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setMail(String mail) {
+        this.mail = mail;
     }
 
     public String getPassword() {

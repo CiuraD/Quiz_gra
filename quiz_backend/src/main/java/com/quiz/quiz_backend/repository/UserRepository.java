@@ -9,4 +9,5 @@ import com.quiz.quiz_backend.model.User;
 public interface UserRepository extends JpaRepository<User, Integer>{
 
     User findByLogin(String login);
+    User findByEmail(String email);
 }

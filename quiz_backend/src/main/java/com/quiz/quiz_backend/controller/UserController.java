@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.quiz.quiz_backend.dto.LoggedUserDTO;
 import com.quiz.quiz_backend.dto.LoginDTO;
 import com.quiz.quiz_backend.dto.RegisterDTO;
 import com.quiz.quiz_backend.service.UserService;
@@ -24,16 +24,13 @@ public class UserController {
     
     @GetMapping("login")
     @ResponseBody
-    public String login(@RequestParam LoginDTO loginDTO) {
-        //return userService.Login(loginDTO);
+    public LoggedUserDTO login(@RequestBody LoginDTO loginDTO) {
         return userService.login(loginDTO);
     }
 
     @PostMapping("register")
     public HttpStatus register(@RequestBody RegisterDTO registerDTO) {
-        //TODO: process POST request
-        
-        return HttpStatus.OK;
+        return userService.register(registerDTO);
     }
 
     @PutMapping("activate/{userId}")
