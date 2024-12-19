@@ -33,6 +33,9 @@ export class LoginComponent {
         next: (response) => {
           console.log('Login successful:', response);
           localStorage.setItem('authToken', response.jwtToken);
+          localStorage.setItem('login', response.username)
+          console.log('Zapisane authToken:', localStorage.getItem('authToken'));
+          console.log('Zapisane login:', localStorage.getItem('login'));
           this.router.navigate(['/menu']);
         },
         error: (err) => {

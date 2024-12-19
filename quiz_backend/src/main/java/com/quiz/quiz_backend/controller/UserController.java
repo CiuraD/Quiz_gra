@@ -22,7 +22,7 @@ public class UserController {
     @Autowired
     UserService userService;
     
-    @GetMapping("login")
+    @PostMapping("login")
     @ResponseBody
     public LoggedUserDTO login(@RequestBody LoginDTO loginDTO) {
         return userService.login(loginDTO);
