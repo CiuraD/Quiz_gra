@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { error } from 'console';
+import { ApiConnectionService } from '../../service/api-connection.service';
 
 @Component({
   selector: 'app-login',
@@ -17,6 +18,7 @@ export class LoginComponent {
   constructor(
     private router: Router,
     private fb: FormBuilder,
+    private ApiConnection: ApiConnectionService,
 
   ) {
     this.loginForm = this.fb.group({
@@ -25,14 +27,18 @@ export class LoginComponent {
     });
   }
   handleSubmit(): void {
-    console.log('Form submitted'); // Dodaj logowanie
     if (this.loginForm.valid) {
       const { email, password } = this.loginForm.value;
-      console.log('Login Data:', { email, password }); // Dodaj logowanie
-      this.router.navigate(['/menu']);
-    }
-    else {
-      //TUTAJ DODAJ WYŚWIETLANIE BŁĘDÓW NA EKRANIE
+      this.ApiConnection.login(email!, password!).subscribe({
+        next: (response) => {
+          console.log('Login successful:', response);
+          localStorage.setItem('authToken', response.jwtToken);
+          this.router.navigate(['/menu']);
+        },
+        error: (err) => {
+          console.error('Login failed:', err);
+        }
+      });
     }
   }
 
