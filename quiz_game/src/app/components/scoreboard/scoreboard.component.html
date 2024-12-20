@@ -1,0 +1,14 @@
+<div class="background-image">
+    <div class="header">
+        <div class="logo">
+            <img src="../../resources/logo.png" (click)="navigateToMenu()" alt="Logo" />
+        </div>
+        <h1>Scoreboard</h1>
+        <button class="logout-header-button" (click)="navigateToLogin()">Logout</button>
+    </div>
+    <div class="body">
+        <div *ngFor="let player of scoreboard" class="score-entry">
+            <p>{{ player.username }}: {{ player.score }}</p>
+        </div>
+    </div>
+</div>
