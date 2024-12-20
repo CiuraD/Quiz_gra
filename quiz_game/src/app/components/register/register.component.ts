@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ApiConnectionService } from '../../service/api-connection.service';
 
 @Component({
   selector: 'app-register',
@@ -16,28 +17,44 @@ export class RegisterComponent {
   constructor(
     private router: Router,
     private fb: FormBuilder,
+    private ApiConnection: ApiConnectionService,
   ){
-    this.registerForm = this.fb.group({
-      nickname: ['', [Validators.required, Validators.minLength(5)]],
-      email: ['', Validators.required, Validators.email],
-      password: ['', [Validators.required, Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}')]],
-      confirmPassword: ['', Validators.required],
-      
-
-    })
+    this.registerForm = this.fb.group(
+      {
+        nickname: ['', [Validators.required, Validators.minLength(3)]],
+        email: ['', [Validators.required, Validators.email]],
+        password: [
+          '', 
+          [Validators.required, Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}')]
+        ],
+        confirmPassword: ['', Validators.required],
+      },
+      { validators: this.passwordsMatchValidator.bind(this) }
+    );
   }
   handleSubmit(): void {
-    console.log('Form submitted'); // Dodaj logowanie
     if (this.registerForm.valid) {
-      const { email, password } = this.registerForm.value;
-      console.log('Login Data:', { email, password }); // Dodaj logowanie
-      this.router.navigate(['/login']);
-    }
-    else {
-      //TUTAJ DODAJ WYŚWIETLANIE BŁĘDÓW NA EKRANIE
+      const { nickname, email, password, confirmPassword } = this.registerForm.value;
+      this.ApiConnection.register(nickname!, email!, password!, confirmPassword!).subscribe({
+        next: () => {
+          console.log('Registration successful');
+          this.router.navigate(['/login']);
+        },
+        error: (err) => {
+          console.error('Registration failed:', err);
+          // Obsłuż błędy
+        }
+      });
     }
   }
   navigateToLogin() {
     this.router.navigate([`/login`]);
+  }
+
+  passwordsMatchValidator(control: AbstractControl): ValidationErrors | null {
+    const password = control.get('password')?.value;
+    const confirmPassword = control.get('confirmPassword')?.value;
+  
+    return password === confirmPassword ? null : { passwordsMismatch: true };
   }
 }

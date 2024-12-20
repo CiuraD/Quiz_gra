@@ -1,37 +1,49 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ApiConnectionService } from '../../service/api-connection.service';
 
 @Component({
   selector: 'app-scoreboard',
-  imports: [CommonModule,ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './scoreboard.component.html',
-  styleUrl: './scoreboard.component.css'
+  styleUrls: ['./scoreboard.component.css']
 })
-export class ScoreboardComponent {
-  scoreboard = [
-    { nick: 'Player1', score: 1200 },
-    { nick: 'Player2', score: 1150 },
-    { nick: 'Player3', score: 1100 },
-    { nick: 'Player4', score: 1050 },
-    { nick: 'Player5', score: 1000 },
-    { nick: 'Player6', score: 950 },
-    { nick: 'Player7', score: 900 },
-    { nick: 'Player8', score: 850 },
-    { nick: 'Player9', score: 800 },
-    { nick: 'Player10', score: 750 }
-  ];
+export class ScoreboardComponent implements OnInit {
+
+  topScore: { username: string, score: number } = { username: '', score: 0 };
+  scoreboard: { username: string, score: number }[] = [];
+
   constructor(
     private router: Router,
-  ) {
+    private apiConnectionService: ApiConnectionService
+  ) { }
 
+  ngOnInit(): void {
+    this.fetchScoreboard();
   }
 
+  fetchScoreboard(): void {
+    this.apiConnectionService.getScoreboard().subscribe({
+      next: (response) => {
+        this.scoreboard = response.sort((a, b) => b.score - a.score);
+
+        this.scoreboard = this.scoreboard.slice(0, 10);
+
+        console.log('Scoreboard:', this.scoreboard);
+      },
+      error: (error) => {
+        console.error('Błąd pobierania wyników:', error);
+      }
+    });
+  }
   navigateToMenu() {
     this.router.navigate([`/menu`]);
   }
+
   navigateToLogin() {
     this.router.navigate([`/login`]);
   }
+
 }
