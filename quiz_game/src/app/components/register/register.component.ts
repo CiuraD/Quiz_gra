@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiConnectionService } from '../../service/api-connection.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-register',

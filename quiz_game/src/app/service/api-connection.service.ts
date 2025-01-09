@@ -1,11 +1,12 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Injectable,  } from '@angular/core';
+import { HttpClient,  HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Question } from '../interface/question';
 
 @Injectable({
   providedIn: 'root',
 })
+
 export class ApiConnectionService {
   private apiUrl = 'http://localhost:8282/api';
 
@@ -40,6 +41,17 @@ export class ApiConnectionService {
       password: password,
       confirmPassword: confirmPassword
     };
+    console.log('registerDTO:', registerDTO);
     return this.http.post(`${this.apiUrl}/user/register`, registerDTO);
+  }
+  sendScore(): Observable<any> {
+    const headers = this.getAuthHeaders();
+    const ScoreDTO = {
+      username: localStorage.getItem('login'),
+      score: localStorage.getItem('Score')
+    }
+
+    console.log('this.apiUrl/score:', `${this.apiUrl}/score`,  ScoreDTO , { headers });
+    return this.http.post(`${this.apiUrl}/score`, ScoreDTO , { headers });
   }
 }

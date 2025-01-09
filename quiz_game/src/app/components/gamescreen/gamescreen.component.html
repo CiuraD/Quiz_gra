@@ -19,18 +19,18 @@
             <div class="game-button-container">
                 <div class="game-row-container">
                     <button class="game-button" [disabled]="eliminatedAnswers.includes('a')" (click)="clickAnswerA()">
-                        {{ question.answer_a || 'Odpowiedź A' }}
+                        {{ 'A:\n' + question.answer_a || 'Odpowiedź A' }}
                     </button>
                     <button class="game-button" [disabled]="eliminatedAnswers.includes('b')" (click)="clickAnswerB()">
-                        {{ question.answer_b || 'Odpowiedź B' }}
+                        {{ 'B:\n' + question.answer_b || 'Odpowiedź B' }}
                     </button>
                 </div>
                 <div class="game-row-container">
                     <button class="game-button" [disabled]="eliminatedAnswers.includes('c')" (click)="clickAnswerC()">
-                        {{ question.answer_c || 'Odpowiedź C' }}
+                        {{ 'C:\n' + question.answer_c || 'Odpowiedź C' }}
                     </button>
                     <button class="game-button" [disabled]="eliminatedAnswers.includes('d')" (click)="clickAnswerD()">
-                        {{ question.answer_d || 'Odpowiedź D' }}
+                        {{ 'D:\n' + question.answer_d || 'Odpowiedź D' }}
                     </button>
                 </div>
                 <div class="game-row-container">
@@ -39,20 +39,6 @@
                     <button class="game-button-hint" [disabled]="isAudienceUsed"
                         (click)="hintAudience()">👨‍👨‍👧‍👦</button>
                 </div>
-            </div>
-            <!-- Wyświetlanie odpowiedzi przyjaciela -->
-            <div *ngIf="friendAnswer" class="friend-answer">
-                <p>Odpowiedź przyjaciela: {{ friendAnswer }}</p>
-            </div>
-            <!-- Wyświetlanie procentów publiczności -->
-            <div *ngIf="audiencePercentages" class="audience-percentage">
-                <p>Procenty publiczności:</p>
-                <ul>
-                    <li>Odp A: {{ audiencePercentages['a'] }}%</li>
-                    <li>Odp B: {{ audiencePercentages['b'] }}%</li>
-                    <li>Odp C: {{ audiencePercentages['c'] }}%</li>
-                    <li>Odp D: {{ audiencePercentages['d'] }}%</li>
-                </ul>
             </div>
         </div>
     </div>
