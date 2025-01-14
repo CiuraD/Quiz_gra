@@ -24,6 +24,9 @@ public class UserService {
     @Autowired
     private JwtUtil jwtUtil;
 
+    @Autowired
+    private ActivationCodeService activationCodeService;
+
     public LoggedUserDTO login(LoginDTO loginDTO) {
         User user = userRepository.findByEmail(loginDTO.getMail());
         if (user == null) {
@@ -65,6 +68,8 @@ public class UserService {
         user.setPassword(registerDTO.getPassword());
         user.setEmail(registerDTO.getEmail());
         userRepository.save(user);
+
+        activationCodeService.createActivationCode(user);
 
         //TODO Implement email sending
         return HttpStatus.OK;
