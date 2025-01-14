@@ -2,7 +2,7 @@ package com.quiz.quiz_backend.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -29,14 +29,15 @@ public class UserController {
     }
 
     @PostMapping("register")
-    public HttpStatus register(@RequestBody RegisterDTO registerDTO) {
-        return userService.register(registerDTO);
+    public ResponseEntity<Void> register(@RequestBody RegisterDTO registerDTO) {
+        HttpStatus status = userService.register(registerDTO);
+        return new ResponseEntity<>(status);
     }
 
     @PutMapping("activate/{userId}")
-    public HttpStatus putMethodName(@PathVariable String userId, @RequestBody String activationCode) {
+    public ResponseEntity<Void> putMethodName(@PathVariable String userId, @RequestBody String activationCode) {
         //TODO: process PUT request
-        
-        return HttpStatus.OK;
+        HttpStatus status = HttpStatus.OK;
+        return new ResponseEntity<>(status);
     }
 }
