@@ -27,6 +27,9 @@ public class UserService {
     @Autowired
     private ActivationCodeService activationCodeService;
 
+    @Autowired
+    private EmailService emailService;
+
     public LoggedUserDTO login(LoginDTO loginDTO) {
         User user = userRepository.findByEmail(loginDTO.getMail());
         if (user == null) {
@@ -69,9 +72,21 @@ public class UserService {
         user.setEmail(registerDTO.getEmail());
         userRepository.save(user);
 
-        activationCodeService.createActivationCode(user);
 
-        //TODO Implement email sending
+        User registretedUser = userRepository.findByEmail(registerDTO.getEmail());
+        if (registretedUser == null) {
+            return HttpStatus.PRECONDITION_FAILED;
+        }
+
+        activationCodeService.createActivationCode(registretedUser);
+
+        String activationCode = activationCodeService.getActivationCodeForUser(registretedUser);
+        if (activationCode == null) {
+            return HttpStatus.PRECONDITION_FAILED;
+        }
+
+        emailService.sendActivationMessage(registretedUser, activationCode);
+
         return HttpStatus.OK;
     }
 }
