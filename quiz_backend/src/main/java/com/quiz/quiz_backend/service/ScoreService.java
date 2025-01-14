@@ -35,10 +35,17 @@ public class ScoreService {
     }
 
     public HttpStatus addScore(ScoreDTO scoreDTO) {
+        if (userRepository.findByLogin(scoreDTO.getUsername()) == null) {
+            return HttpStatus.NOT_FOUND;  
+        }
+
         ScoreTable scoreTable = new ScoreTable();
         scoreTable.setScore(scoreDTO.getScore());
         scoreTable.setUser(userRepository.findByLogin(scoreDTO.getUsername()));
-        scoreTableRepository.save(scoreTable);
-        return HttpStatus.OK;
+        if (scoreTableRepository.save(scoreTable) != null) {
+            return HttpStatus.OK;
+        }
+
+        return HttpStatus.INTERNAL_SERVER_ERROR;
     }
 }

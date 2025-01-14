@@ -9,7 +9,10 @@
   margin: 0;
   padding: 0;
 }
-
+.logo img {
+  width: 5vw;
+  height: 10vh;
+}
 .header {
   width: 100%;
   display: flex;
@@ -83,3 +86,5 @@
 .logout-header-button:active::before {
   scale: 0.7;
 }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

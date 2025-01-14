@@ -1,0 +1,30 @@
+.body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    /* Flexbox for centering */
+    justify-content: center;
+    /* Center horizontally */
+    align-items: center;
+    /* Center vertically */
+    height: 100vh;
+    /* Full viewport height */
+    width: 100vw;
+    flex-direction: column;
+}
+.about-text-body{
+    font-size:1.5rem;
+    background: linear-gradient( 135deg, #460b77, #6d1010 );
+    box-shadow: 5px 5px 5px #3d0505a6;
+    width: 75vw;
+    height: 25vh;
+    border-radius: 25rem;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1%;
+}
+.about-text-body:hover{
+    transform: scale(1.15);
+}

@@ -68,6 +68,12 @@
     background-color: #5a3cb5;
     transform: scale(1.15); /* Powiększenie przycisku przy najechaniu */
 }
+.game-button:disabled {
+    background: linear-gradient(135deg, #b0b0b0, #d4d4d4);
+    color: #7f7f7f;
+    cursor: not-allowed;
+    box-shadow: none;
+}
 
 .game-button:focus {
     outline: none;
@@ -98,4 +104,10 @@
 .game-button-hint:focus {
     outline: none;
     box-shadow: 0 0 0 3px rgba(106, 78, 197, 0.5);
+}
+.game-button-hint:disabled {
+    background: linear-gradient(135deg, #b0b0b0, #d4d4d4);
+    color: #7f7f7f;
+    cursor: not-allowed;
+    box-shadow: none;
 }

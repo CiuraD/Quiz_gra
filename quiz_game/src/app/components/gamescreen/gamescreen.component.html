@@ -1,7 +1,7 @@
 <div class="background-image">
     <div class="header">
         <div class="logo">
-            <img src="./src/resources/logo.png" (click)="navigateToMenu()" alt="Logo" />
+            <img src="../../resources/logo.png" (click)="navigateToMenu()" alt="Logo" />
         </div>
         <h1>Game</h1>
         <button class="logout-header-button" (click)="navigateToLogin()">Logout</button>
@@ -9,27 +9,35 @@
     <div class="game-container">
         <div class="body">
             <div class="game-question">
-                <a>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam id posuere felis, in fermentum velit.
-                    Nam consectetur nisl et tellus scelerisque, quis euismod mi consectetur. Nulla maximus blandit
-                    sapien in.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam id posuere felis, in
-                    fermentum velit. Nam consectetur nisl et tellus scelerisque, quis euismod mi consectetur. Nulla
-                    maximus blandit sapien in.
-                </a>
+                <p *ngIf="question; else loading">
+                    {{ question.questionContent }}
+                </p>
+                <ng-template #loading>
+                    <p>Ładowanie pytania...</p>
+                </ng-template>
             </div>
             <div class="game-button-container">
                 <div class="game-row-container">
-                    <button class="game-button" (click)="clickAnswerA()">Answer A</button>
-                    <button class="game-button" (click)="clickAnswerB()">Answer B</button>
+                    <button class="game-button" [disabled]="eliminatedAnswers.includes('a')" (click)="clickAnswerA()">
+                        {{ 'A:\n' + question.answer_a || 'Odpowiedź A' }}
+                    </button>
+                    <button class="game-button" [disabled]="eliminatedAnswers.includes('b')" (click)="clickAnswerB()">
+                        {{ 'B:\n' + question.answer_b || 'Odpowiedź B' }}
+                    </button>
                 </div>
                 <div class="game-row-container">
-                    <button class="game-button" (click)="clickAnswerC()">Answer C</button>
-                    <button class="game-button" (click)="clickAnswerD()">Answer D</button>
+                    <button class="game-button" [disabled]="eliminatedAnswers.includes('c')" (click)="clickAnswerC()">
+                        {{ 'C:\n' + question.answer_c || 'Odpowiedź C' }}
+                    </button>
+                    <button class="game-button" [disabled]="eliminatedAnswers.includes('d')" (click)="clickAnswerD()">
+                        {{ 'D:\n' + question.answer_d || 'Odpowiedź D' }}
+                    </button>
                 </div>
                 <div class="game-row-container">
-                    <button class="game-button-hint" (click)="hint5050()">50/50</button>
-                    <button class="game-button-hint" (click)="hintPhone()">📞</button>
-                    <button class="game-button-hint" (click)="hintAudience()">👨‍👨‍👧‍👦</button>
+                    <button class="game-button-hint" [disabled]="is5050Used" (click)="hint5050()">50/50</button>
+                    <button class="game-button-hint" [disabled]="isPhoneUsed" (click)="hintPhone()">📞</button>
+                    <button class="game-button-hint" [disabled]="isAudienceUsed"
+                        (click)="hintAudience()">👨‍👨‍👧‍👦</button>
                 </div>
             </div>
         </div>
