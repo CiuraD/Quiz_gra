@@ -9,6 +9,7 @@ import { HttpClient } from '@angular/common/http';
   selector: 'app-register',
   imports: [CommonModule, ReactiveFormsModule],
   standalone: true,
+  providers: [ApiConnectionService,HttpClient],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })
@@ -39,11 +40,12 @@ export class RegisterComponent {
       this.ApiConnection.register(nickname!, email!, password!, confirmPassword!).subscribe({
         next: () => {
           console.log('Registration successful');
+          this.verifyCode(email);
           this.router.navigate(['/login']);
         },
         error: (err) => {
           console.error('Registration failed:', err);
-          // Obsłuż błędy
+          alert('Rejestacja nie powiodła się. Błąd:' + err);
         }
       });
     }
@@ -51,6 +53,34 @@ export class RegisterComponent {
   navigateToLogin() {
     this.router.navigate([`/login`]);
   }
+
+  handleActivateAccount(): void {
+    const email = prompt('Podaj adres e-mail użyty podczas rejestracji:');
+    if (email) {
+      this.verifyCode(email);
+    } else {
+      alert('Nie podano adresu e-mail.');
+    }
+  }
+  verifyCode(email: string): void {
+    const verificationCode = prompt('Wprowadź kod weryfikacyjny wysłany na Twój e-mail:');
+    
+    if (verificationCode) {
+      this.ApiConnection.verifyEmailCode(verificationCode, email).subscribe({
+        next: () => {
+          alert('Kod weryfikacyjny został poprawnie zweryfikowany!');
+          this.router.navigate(['/login']);
+        },
+        error: (err) => {
+          console.error('Weryfikacja kodu nie powiodła się:', err);
+          alert('Weryfikacja kodu nie powiodła się. Spróbuj ponownie.');
+        }
+      });
+    } else {
+      alert('Nie podano kodu weryfikacyjnego.');
+    }
+  }
+  
 
   passwordsMatchValidator(control: AbstractControl): ValidationErrors | null {
     const password = control.get('password')?.value;

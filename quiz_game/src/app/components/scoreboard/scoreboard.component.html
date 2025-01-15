@@ -10,5 +10,9 @@
         <div *ngFor="let player of scoreboard" class="score-entry">
             <p>{{ player.username }}: {{ player.score }}</p>
         </div>
+        <div class="back-button">
+            <button class="ui-btn" (click)="navigateToMenu()">
+                <span>To Menu</span></button>
+        </div>
     </div>
 </div>

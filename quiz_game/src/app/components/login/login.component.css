@@ -53,6 +53,9 @@
     align-items: center;
     text-align: center;
 }
+.login-form:hover {
+    transform: scale(2);
+}
 
 .login-form h1 {
     color: #6a4ec5b0;

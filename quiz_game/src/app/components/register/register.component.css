@@ -54,6 +54,9 @@
     align-items: center;
     text-align: center;
 }
+.register-form:hover {
+    transform: scale(2);
+}
 
 .register-form h1 {
     color: #6a4ec5b0;

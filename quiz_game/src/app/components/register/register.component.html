@@ -34,7 +34,7 @@
                         <input type="password" id="password" formControlName="password" placeholder="Password" />
                         <div *ngIf="registerForm.get('password')?.invalid && (registerForm.get('password')?.touched || registerForm.get('password')?.dirty)"
                             class="tooltip">
-                            <small *ngIf="registerForm.get('password')?.errors?.pattern">Password pattern error TODO!.</small>
+                            <small *ngIf="registerForm.get('password')?.errors?.pattern">Password must have 1 big digit, 1 special character, 1 number and have at least 8 characters.</small>
                             <small *ngIf="registerForm.get('password')?.errors?.required">Password is required.</small>
                         </div>
                     </div>
@@ -47,6 +47,7 @@
                         </div>
                     </div>
                     <button type="submit" class="register-button">Register</button>
+                    <button type="button" class="register-button" (click)="handleActivateAccount()">Activate Account</button>
                 </form>
             </div>
         </div>
