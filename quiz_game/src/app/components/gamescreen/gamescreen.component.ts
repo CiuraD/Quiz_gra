@@ -11,6 +11,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   selector: 'app-gamescreen',
   standalone: true,
   imports: [CommonModule],
+  providers: [ApiConnectionService, HttpClient],
   templateUrl: './gamescreen.component.html',
   styleUrls: ['./gamescreen.component.css'],
 })
