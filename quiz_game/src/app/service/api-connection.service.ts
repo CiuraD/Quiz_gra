@@ -54,9 +54,10 @@ export class ApiConnectionService {
     console.log('this.apiUrl/score:', `${this.apiUrl}/score`,  ScoreDTO , { headers });
     return this.http.post(`${this.apiUrl}/score`, ScoreDTO , { headers });
   }
+
   verifyEmailCode(code: string, email: string): Observable<any> {
     const headers = this.getAuthHeaders();
-    const verificationDTO = { code };
-    return this.http.post(`${this.apiUrl}/user/activate/${email}`, verificationDTO, { headers });
+    const verificationDTO = { code: code, email: email };
+    return this.http.post(`${this.apiUrl}/user/activate`, verificationDTO, { headers });
   }
 }
