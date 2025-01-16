@@ -8,6 +8,7 @@ import { Question } from '../interface/question';
 })
 
 export class ApiConnectionService {
+  
   private apiUrl = 'http://localhost:8282/api';
 
   constructor(private http: HttpClient) { }
@@ -56,8 +57,12 @@ export class ApiConnectionService {
   }
 
   verifyEmailCode(code: string, email: string): Observable<any> {
-    const headers = this.getAuthHeaders();
+    
     const verificationDTO = { code: code, email: email };
-    return this.http.post(`${this.apiUrl}/user/activate`, verificationDTO, { headers });
+    return this.http.post(`${this.apiUrl}/user/activate`, verificationDTO);
+  }
+  resendVerificationCode(email: string) {
+    
+    return this.http.get(`${this.apiUrl}/activate/${email}`);
   }
 }
