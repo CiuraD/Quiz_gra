@@ -89,4 +89,20 @@ public class UserService {
 
         return HttpStatus.OK;
     }
+
+    public HttpStatus sendActivationCode(String userMail) {
+        User user = userRepository.findByEmail(userMail);
+        if (user == null) {
+            return HttpStatus.NOT_FOUND;
+        }
+
+        String activationCode = activationCodeService.getActivationCodeForUser(user);
+        if (activationCode == null) {
+            return HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+
+        emailService.sendActivationMessage(user, activationCode);
+
+        return HttpStatus.OK;
+    }
 }

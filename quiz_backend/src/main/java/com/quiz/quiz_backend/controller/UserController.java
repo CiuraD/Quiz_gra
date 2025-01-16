@@ -3,6 +3,7 @@ package com.quiz.quiz_backend.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -15,6 +16,7 @@ import com.quiz.quiz_backend.dto.LoggedUserDTO;
 import com.quiz.quiz_backend.dto.LoginDTO;
 import com.quiz.quiz_backend.dto.RegisterDTO;
 import com.quiz.quiz_backend.service.UserService;
+
 
 @RestController
 @RequestMapping("/api/user")
@@ -40,4 +42,11 @@ public class UserController {
         HttpStatus status = HttpStatus.OK;
         return new ResponseEntity<>(status);
     }
+
+    @GetMapping("activate/{userMail}")
+    public ResponseEntity<Void> getMethodName(@PathVariable String userMail) {
+        HttpStatus status = userService.sendActivationCode(userMail);
+        return new ResponseEntity<>(null);
+    }
+    
 }
