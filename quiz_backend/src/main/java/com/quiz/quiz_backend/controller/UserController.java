@@ -46,7 +46,7 @@ public class UserController {
     @GetMapping("activate/{userMail}")
     public ResponseEntity<Void> getMethodName(@PathVariable String userMail) {
         HttpStatus status = userService.sendActivationCode(userMail);
-        return new ResponseEntity<>(null);
+        return new ResponseEntity<>(status);
     }
     
 }
