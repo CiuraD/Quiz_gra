@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.quiz.quiz_backend.dto.LoggedUserDTO;
 import com.quiz.quiz_backend.dto.LoginDTO;
 import com.quiz.quiz_backend.dto.RegisterDTO;
+import com.quiz.quiz_backend.dto.VerificationDTO;
 import com.quiz.quiz_backend.service.UserService;
 
 
@@ -36,17 +37,15 @@ public class UserController {
         return new ResponseEntity<>(status);
     }
 
-    @PutMapping("activate/{userId}")
-    public ResponseEntity<Void> putMethodName(@PathVariable String userId, @RequestBody String activationCode) {
-        //TODO: process PUT request
-        HttpStatus status = HttpStatus.OK;
+    @PutMapping("activate")
+    public ResponseEntity<Void> activateUser(@RequestBody VerificationDTO verificationDTO) {
+        HttpStatus status = userService.activateUser(verificationDTO);
         return new ResponseEntity<>(status);
     }
 
     @GetMapping("activate/{userMail}")
-    public ResponseEntity<Void> getMethodName(@PathVariable String userMail) {
+    public ResponseEntity<Void> reSendActivationCode(@PathVariable String userMail) {
         HttpStatus status = userService.sendActivationCode(userMail);
         return new ResponseEntity<>(status);
     }
-    
 }

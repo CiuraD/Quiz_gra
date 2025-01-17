@@ -57,12 +57,11 @@ export class ApiConnectionService {
   }
 
   verifyEmailCode(code: string, email: string): Observable<any> {
-    
     const verificationDTO = { code: code, email: email };
-    return this.http.post(`${this.apiUrl}/user/activate`, verificationDTO);
+    return this.http.put(`${this.apiUrl}/user/activate`, verificationDTO);
   }
+
   resendVerificationCode(email: string) {
-    
-    return this.http.get(`${this.apiUrl}/activate/${email}`);
+    return this.http.get(`${this.apiUrl}/user/activate/resend/${email}`);
   }
 }

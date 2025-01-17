@@ -1,5 +1,7 @@
 package com.quiz.quiz_backend.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -7,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.quiz.quiz_backend.dto.LoggedUserDTO;
 import com.quiz.quiz_backend.dto.LoginDTO;
 import com.quiz.quiz_backend.dto.RegisterDTO;
+import com.quiz.quiz_backend.dto.VerificationDTO;
 import com.quiz.quiz_backend.model.User;
 import com.quiz.quiz_backend.repository.UserRepository;
 import com.quiz.quiz_backend.util.JwtUtil;
@@ -17,6 +20,9 @@ public class UserService {
     private static final int RESPONSE_USER_NOT_FOUND = 494;
     private static final int RESPONSE_INVALID_PASSWORD = 884;
     private static final int RESPONSE_USER_NOT_ACTIVATED = 958;
+
+    private static final Logger logger = LoggerFactory.getLogger(UserService.class);
+
 
     @Autowired
     private UserRepository userRepository;
@@ -41,8 +47,7 @@ public class UserService {
             return new LoggedUserDTO("", "", RESPONSE_INVALID_PASSWORD);
         }
 
-        if (false) {
-            //TODO implement activation logic
+        if (!user.isActivated()) {
             return new LoggedUserDTO("", "", RESPONSE_USER_NOT_ACTIVATED);
         }
         
@@ -102,6 +107,22 @@ public class UserService {
         }
 
         emailService.sendActivationMessage(user, activationCode);
+
+        return HttpStatus.OK;
+    }
+
+    public HttpStatus activateUser(VerificationDTO verificationDTO) {
+        User user = userRepository.findByEmail(verificationDTO.getEmail());
+        if (user == null) {
+            return HttpStatus.NOT_FOUND;
+        }
+
+        if (!activationCodeService.isActivationCodeCorrect(verificationDTO.getVerificationCode(), user)) {
+            return HttpStatus.BAD_REQUEST;
+        }
+
+        user.setActivated(true);
+        userRepository.save(user);
 
         return HttpStatus.OK;
     }
