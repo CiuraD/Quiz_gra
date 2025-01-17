@@ -4,6 +4,8 @@
             <img src="../../resources/logo.png" alt="Logo" />
         </div>
         <h1>Register</h1>
+        <button type="button" class="logout-header-button" (click)="handleResendCode()">Resend Activation Code</button>
+        <button type="button" class="logout-header-button" (click)="handleActivateAccount()">Activate Account</button>
         <button class="logout-header-button" (click)="navigateToLogin()">Login</button>
     </div>
     <div class="register-container">
@@ -46,8 +48,7 @@
                             <small *ngIf="registerForm.get('confirmPassword')?.errors?.required">Confirm Password is required.</small>
                         </div>
                     </div>
-                    <button type="submit" class="register-button">Register</button>
-                    <button type="button" class="register-button" (click)="handleActivateAccount()">Activate Account</button>
+                    <button type="submit" class="ui-btn">Register</button>
                 </form>
             </div>
         </div>
