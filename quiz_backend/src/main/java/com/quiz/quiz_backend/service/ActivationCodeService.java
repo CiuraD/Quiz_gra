@@ -1,6 +1,8 @@
 package com.quiz.quiz_backend.service;
 
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +12,8 @@ import com.quiz.quiz_backend.repository.ActivationCodeRepository;
 
 @Service
 public class ActivationCodeService {
+
+    private static final Logger logger = LoggerFactory.getLogger(ActivationCodeService.class);
 
     @Autowired
     private ActivationCodeRepository activationCodeRepository;
