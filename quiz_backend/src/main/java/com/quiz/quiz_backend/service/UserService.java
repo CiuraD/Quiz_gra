@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.quiz.quiz_backend.dto.LoggedUserDTO;
 import com.quiz.quiz_backend.dto.LoginDTO;
@@ -23,6 +24,7 @@ public class UserService {
 
     private static final Logger logger = LoggerFactory.getLogger(UserService.class);
 
+    private final BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 
     @Autowired
     private UserRepository userRepository;
@@ -43,7 +45,7 @@ public class UserService {
         }
 
         //TODO Implement password hashing
-        if (!user.getPassword().equals(loginDTO.getPassword())) {
+        if (!bCryptPasswordEncoder.matches(loginDTO.getPassword(), user.getPassword())) {
             return new LoggedUserDTO("", "", RESPONSE_INVALID_PASSWORD);
         }
 
@@ -72,8 +74,8 @@ public class UserService {
 
         User user = new User();
         user.setLogin(registerDTO.getUsername());
-        //TODO Implement password hashing
-        user.setPassword(registerDTO.getPassword());
+        String hashedPassword = bCryptPasswordEncoder.encode(registerDTO.getPassword());
+        user.setPassword(hashedPassword);
         user.setEmail(registerDTO.getEmail());
         userRepository.save(user);
 
