@@ -34,8 +34,8 @@
 .logout-header-button {
   margin: 3vh;
   position: relative;
-  width: 82px;
-  height: 36px;
+  width: 164px;
+  height: 62px;
   background-color: #000;
   display: flex;
   align-items: center;
@@ -47,6 +47,7 @@
   gap: 12px;
   border-radius: 8px;
   cursor: pointer;
+  font-size: 1.2rem;
 }
 
 .logout-header-button::before {
@@ -56,8 +57,8 @@
   left: -4px;
   top: -1px;
   margin: auto;
-  width: 90px;
-  height: 45px;
+  width: 174px;
+  height: 75px;
   border-radius: 10px;
   background: linear-gradient(135deg, #363770, #2da8f0);
   z-index: -10;
@@ -126,9 +127,6 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .ui-btn {
   box-sizing: border-box;
   padding: var(--btn-padding);
-  display: flex;
-  align-items: center;
-  justify-content: center;
   color: var(--default-btn-color);
   font: var(--font-weight) var(--font-size) var(--font-family);
   background: var(--btn-default-bg);
@@ -137,8 +135,14 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   transition: var(--btn-transition);
   overflow: hidden;
   box-shadow: var(--btn-shadow);
+  scale: 1.5;
+  border-radius: 100px;
 }
-
+.ui-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  
+}
 .ui-btn span {
   letter-spacing: var(--btn-letter-spacing);
   transition: var(--btn-transition);

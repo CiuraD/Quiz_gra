@@ -3,8 +3,8 @@
         <div class="logo">
             <img src="../../resources/logo.png" alt="Logo" />
         </div>
-        <h1>Register</h1>
         <button type="button" class="logout-header-button" (click)="handleResendCode()">Resend Activation Code</button>
+        <h1>Register</h1>
         <button type="button" class="logout-header-button" (click)="handleActivateAccount()">Activate Account</button>
         <button class="logout-header-button" (click)="navigateToLogin()">Login</button>
     </div>
@@ -19,7 +19,8 @@
                         <div *ngIf="registerForm.get('nickname')?.invalid && (registerForm.get('nickname')?.touched || registerForm.get('nickname')?.dirty)"
                             class="tooltip">
                             <small *ngIf="registerForm.get('nickname')?.errors?.required">Nick Name is required.</small>
-                            <small *ngIf="registerForm.get('nickname')?.errors?.minLength">Nick Name is too short.</small>
+                            <small *ngIf="registerForm.get('nickname')?.errors?.minlength">Nick Name is too
+                                short.</small>
                         </div>
                     </div>
                     <label for="email">Email</label>
@@ -36,19 +37,26 @@
                         <input type="password" id="password" formControlName="password" placeholder="Password" />
                         <div *ngIf="registerForm.get('password')?.invalid && (registerForm.get('password')?.touched || registerForm.get('password')?.dirty)"
                             class="tooltip">
-                            <small *ngIf="registerForm.get('password')?.errors?.pattern">Password must have 1 big digit, 1 special character, 1 number and have at least 8 characters.</small>
+                            <small *ngIf="registerForm.get('password')?.errors?.pattern">Password must have:<br>- 1 big
+                                digit<br>- 1 special character<br>- 1 number<br>- at least 8 characters.</small>
                             <small *ngIf="registerForm.get('password')?.errors?.required">Password is required.</small>
                         </div>
                     </div>
                     <label for="confirmPassword">Confirm Password</label>
                     <div class="input-container">
-                        <input type="password" id="confirmPassword" formControlName="confirmPassword" placeholder="Confirm Password" />
+                        <input type="password" id="confirmPassword" formControlName="confirmPassword"
+                            placeholder="Confirm Password" />
                         <div *ngIf="registerForm.get('confirmPassword')?.invalid && (registerForm.get('confirmPassword')?.touched || registerForm.get('confirmPassword')?.dirty)"
                             class="tooltip">
-                            <small *ngIf="registerForm.get('confirmPassword')?.errors?.required">Confirm Password is required.</small>
+                            <small *ngIf="registerForm.get('confirmPassword')?.errors?.required">Confirm Password is
+                                required.</small>
+                            <small
+                                *ngIf="registerForm.errors?.passwordsMismatch && registerForm.get('confirmPassword')?.touched">Confirm
+                                Password is diffrent.</small>
                         </div>
                     </div>
-                    <button type="submit" class="ui-btn">Register</button>
+                    <button type="submit" class="ui-btn" [disabled]="registerForm.invalid">
+                        <span>Register</span></button>
                 </form>
             </div>
         </div>

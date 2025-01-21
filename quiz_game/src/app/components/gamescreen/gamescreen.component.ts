@@ -3,14 +3,14 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiConnectionService } from '../../service/api-connection.service';
 import { Question } from '../../interface/question';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { GameService } from '../../service/game.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-gamescreen',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, HttpClientModule],
   providers: [ApiConnectionService, HttpClient],
   templateUrl: './gamescreen.component.html',
   styleUrls: ['./gamescreen.component.css'],
@@ -169,49 +169,35 @@ export class GamescreenComponent {
     if (this.isAudienceUsed) return;
   
     const percentages: Record<string, number> = { a: 0, b: 0, c: 0, d: 0 };
-    const answers = ['a', 'b', 'c', 'd'];
+    const allAnswers = ['a', 'b', 'c', 'd'];
+    const availableAnswers = allAnswers.filter((answer) => !this.eliminatedAnswers.includes(answer));
+    const correctAnswer = this.question.correctAnswer;
   
-    if (this.questionLevel <= 6) {
-      const correctIsHighest = Math.random() > 0.1;
-      if (correctIsHighest) {
-        percentages[this.question.correctAnswer] = 50 + Math.floor(Math.random() * 30);
-      } else {
-        const randomIncorrect = answers.filter((a) => a !== this.question.correctAnswer)[Math.floor(Math.random() * 3)];
-        percentages[randomIncorrect] = 50 + Math.floor(Math.random() * 30);
-      }
+    let remainingPercent = 100;
   
-      // Obliczamy pozostałe procenty
-      const remainingPercent = 100 - percentages[this.question.correctAnswer];
-      const incorrectAnswers = answers.filter((a) => a !== this.question.correctAnswer);
+    // Decydujemy, ile procent publiczność przydzieli dla poprawnej odpowiedzi
+    const correctAnswerPercentage =
+      this.questionLevel <= 6
+        ? 50 + Math.floor(Math.random() * 30) // Wyższe zaufanie dla niższych poziomów
+        : Math.floor(remainingPercent * (this.questionLevel <= 9 ? 0.3 : 0.2)); // Mniejsze zaufanie dla wyższych poziomów
   
-      // Rozdzielamy pozostałe procenty równomiernie pomiędzy błędne odpowiedzi
-      const baseIncorrectPercentage = Math.floor(remainingPercent / incorrectAnswers.length);
-      let remainingToDistribute = remainingPercent - baseIncorrectPercentage * incorrectAnswers.length;
+    percentages[correctAnswer] = correctAnswerPercentage;
+    remainingPercent -= correctAnswerPercentage;
   
-      // Przypisujemy pozostałe procenty do błędnych odpowiedzi
-      incorrectAnswers.forEach((answer, index) => {
-        percentages[answer] = baseIncorrectPercentage + (index === incorrectAnswers.length - 1 ? remainingToDistribute : 0);
-      });
+    // Rozdzielamy pozostałe procenty na niepoprawne odpowiedzi
+    const incorrectAnswers = availableAnswers.filter((answer) => answer !== correctAnswer);
+    const baseIncorrectPercentage = Math.floor(remainingPercent / incorrectAnswers.length);
+    let leftover = remainingPercent - baseIncorrectPercentage * incorrectAnswers.length;
   
-    }
-    else {
-      percentages[this.question.correctAnswer] = 20; 
-      const remainingPercent = 80; 
-      const incorrectAnswers = answers.filter((a) => a !== this.question.correctAnswer);
+    incorrectAnswers.forEach((answer, index) => {
+      percentages[answer] = baseIncorrectPercentage + (index === incorrectAnswers.length - 1 ? leftover : 0);
+    });
   
-      const baseIncorrectPercentage = Math.floor(remainingPercent / incorrectAnswers.length);
-  
-      let remainingToDistribute = remainingPercent - baseIncorrectPercentage * incorrectAnswers.length;
-  
-      incorrectAnswers.forEach((answer, index) => {
-        percentages[answer] = baseIncorrectPercentage + (index === incorrectAnswers.length - 1 ? remainingToDistribute : 0);
-      });
-    }
-  
+    // Oznaczamy koło jako użyte
     this.isAudienceUsed = true;
     this.GameService.UsedAudience();
   
-    const percentagesMessage = `Procenty publiczności: 
+    const percentagesMessage = `Procenty publiczności:
       A: ${percentages['a']}% ||
       B: ${percentages['b']}% ||
       C: ${percentages['c']}% ||
@@ -219,7 +205,7 @@ export class GamescreenComponent {
     `;
   
     this.snackBar.open(percentagesMessage, 'Zamknij', {
-      duration: 30000, 
+      duration: 30000,
       horizontalPosition: 'center',
       verticalPosition: 'bottom',
     });
@@ -227,17 +213,25 @@ export class GamescreenComponent {
     console.log('Procenty publiczności:', percentages);
   }
   
-  
+
 
   hintPhone(): void {
     if (this.isPhoneUsed) return;
 
+    const availableAnswers = ['a', 'b', 'c', 'd'].filter(
+      (answer) => !this.eliminatedAnswers.includes(answer)
+    );
+
     if (this.questionLevel <= 3) {
       this.friendAnswer = this.question.correctAnswer;
     } else if (this.questionLevel <= 6) {
-      this.friendAnswer = Math.random() < 0.6 ? this.question.correctAnswer : this.getRandomAnswer();
+      this.friendAnswer = Math.random() < 0.6
+        ? this.question.correctAnswer
+        : this.getRandomAnswer(availableAnswers);
     } else if (this.questionLevel <= 9) {
-      this.friendAnswer = Math.random() < 0.2 ? this.question.correctAnswer : this.getRandomAnswer();
+      this.friendAnswer = Math.random() < 0.2
+        ? this.question.correctAnswer
+        : this.getRandomAnswer(availableAnswers);
     } else {
       this.friendAnswer = null;
     }
@@ -246,19 +240,16 @@ export class GamescreenComponent {
     this.friendAnswer = this.friendAnswer?.toUpperCase() || null;
     const message = this.friendAnswer ? `Odpowiedź przyjaciela: ${this.friendAnswer}` : 'Brak odpowiedzi';
 
-    // Wyświetlenie powiadomienia przez 30 sekund
     this.snackBar.open(message, 'Zamknij', {
-      duration: 30000, // Czas trwania powiadomienia w milisekundach
+      duration: 30000,
       horizontalPosition: 'center',
       verticalPosition: 'bottom',
     });
 
     console.log('Odpowiedź przyjaciela:', this.friendAnswer || 'Brak odpowiedzi');
-
   }
 
-  private getRandomAnswer(): string {
-    const answers = ['a', 'b', 'c', 'd'];
-    return answers[Math.floor(Math.random() * answers.length)];
+  private getRandomAnswer(availableAnswers: string[]): string {
+    return availableAnswers[Math.floor(Math.random() * availableAnswers.length)];
   }
 }

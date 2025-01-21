@@ -34,3 +34,12 @@
     left: 50%;
     transform: translateX(-50%); /* Centruje przycisk poziomo */
 }
+.about-text-body ul{
+    margin-left: 5vw;
+    padding: 0;
+}
+.about-text-body ul li{
+    margin-left: 5vw;
+    padding: 0;
+    text-align: left;
+}

@@ -101,7 +101,13 @@ export class RegisterComponent {
   passwordsMatchValidator(control: AbstractControl): ValidationErrors | null {
     const password = control.get('password')?.value;
     const confirmPassword = control.get('confirmPassword')?.value;
-
-    return password === confirmPassword ? null : { passwordsMismatch: true };
+    if (password !== confirmPassword) {
+      control.get('confirmPassword')?.setErrors({ passwordsMismatch: true }); // Oznaczenie błędu w polu
+      return { passwordsMismatch: true };
+    }
+    else {
+      control.get('confirmPassword')?.setErrors(null); // Usunięcie oznaczenia błędu w polu
+      return password === confirmPassword ? null : { passwordsMismatch: true };
+    }
   }
 }
