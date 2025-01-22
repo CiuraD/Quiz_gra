@@ -1,1 +1,21 @@
-<p>endgamescreen works!</p>
+<div class="background-image">
+    <div class="header">
+        <div class="logo">
+            <img src="../../resources/logo.png" (click)="navigateToMenu()" alt="Logo" />
+        </div>
+        <h1>About App</h1>
+        <button class="logout-header-button" (click)="navigateToLogin()">Logout</button>
+    </div>
+    <div class="body">
+        <div class="about-text-body">
+            <p>
+                {{username}}, you have completed the game!&nbsp;
+                Your score is: {{score}}
+            </p>
+        </div>
+        <div class="back-button">
+            <button class="ui-btn" (click)="navigateToMenu()">
+                <span>To Menu</span></button>
+        </div>
+    </div>
+</div>

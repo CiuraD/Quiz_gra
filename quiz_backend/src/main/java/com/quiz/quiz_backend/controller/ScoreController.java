@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,7 +26,8 @@ public class ScoreController {
     }
 
     @PostMapping("")
-    public HttpStatus addScore(@RequestBody ScoreDTO scoreDTO) {
-        return scoreService.addScore(scoreDTO);
+    public ResponseEntity<Void> addScore(@RequestBody ScoreDTO scoreDTO) {
+        HttpStatus status = scoreService.addScore(scoreDTO);
+        return new ResponseEntity<>(status);
     }
 }
