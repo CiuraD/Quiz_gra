@@ -1,0 +1,38 @@
+.body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    /* Flexbox for centering */
+    justify-content: center;
+    /* Center horizontally */
+    align-items: center;
+    /* Center vertically */
+    height: 100vh;
+    /* Full viewport height */
+    width: 100vw;
+    flex-direction: column;
+}
+.about-text-body{
+    background: linear-gradient(135deg, #050892, #1670a5);
+    box-shadow: 5px 5px 5px #3d0505a6;
+    width: 75vw;
+    height: 25vh;
+    border-radius: 25rem;
+    font-size: 250%;
+    color: #E3B14E;
+    font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;    text-align: center;
+    display: flex;
+    align-items: center;
+    text-shadow: black 6px 6px 6px;
+    justify-content: center;
+    padding: 1%;
+}
+.about-text-body:hover{
+    transform: scale(1.15);
+}
+.back-button {
+    position: absolute;
+    bottom: 5%;
+    left: 50%;
+    transform: translateX(-50%); /* Centruje przycisk poziomo */
+}

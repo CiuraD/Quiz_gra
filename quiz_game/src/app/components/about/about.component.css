@@ -14,7 +14,7 @@
 }
 .about-text-body{
     font-size:1.5rem;
-    background: linear-gradient( 135deg, #460b77, #6d1010 );
+    background: linear-gradient( 135deg, #1539da, #eccc12 );
     box-shadow: 5px 5px 5px #3d0505a6;
     width: 75vw;
     height: 25vh;
@@ -23,8 +23,23 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 1%;
+    padding: 5%;
 }
 .about-text-body:hover{
     transform: scale(1.15);
+}
+.back-button {
+    position: absolute;
+    bottom: 5%;
+    left: 50%;
+    transform: translateX(-50%); /* Centruje przycisk poziomo */
+}
+.about-text-body ul{
+    margin-left: 5vw;
+    padding: 0;
+}
+.about-text-body ul li{
+    margin-left: 5vw;
+    padding: 0;
+    text-align: left;
 }

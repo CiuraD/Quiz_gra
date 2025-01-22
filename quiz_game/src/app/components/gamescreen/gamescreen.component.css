@@ -11,6 +11,7 @@
     /* Full viewport height */
     width: 100vw;
     flex-direction: column;
+    
 }
 
 .game-container {
@@ -19,18 +20,24 @@
     align-items: center;
     margin: 0;
     padding: 0;
+    
 }
 
 .game-question {
-    background: linear-gradient(135deg, #1a5394, #aa151c);
+    background: linear-gradient(135deg, #050892, #1670a5);
     display: flex;
-    width: 75vw;
+    color: #E3B14E;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    width: 100% + 20vw;
     margin: 5vh;
     text-align: center;
-    font-size: 150%;
+    justify-content: center;
+    font-size: 5vh;
     box-shadow: 4px 4px 4px;
     border-radius: 25px;
-    border: solid 5px #107215;
+    padding: 1%;
+    border: solid 5px #E3B14E;
+    text-shadow: black 6px 6px 6px;
 }
 /* Kontener przycisków */
 .game-button-container {
@@ -51,15 +58,17 @@
 
 /* Styl przycisków */
 .game-button {
-    background: linear-gradient(135deg, #20067c, #8275ad);
-    color: white;
-    border: none;
+    background: linear-gradient(135deg, #050892, #1670a5);
+    color: #E3B14E;
+    font-size: 3vh;
+    border: solid 5px #E3B14E;
+    font-family: Arial, Helvetica, sans-serif;
     border-radius: 5px;
     padding: 10px 20px;
-    font-size: 16px;
     font-weight: bold;
     cursor: pointer;
     text-align: center;
+    text-shadow: black 4px 4px 4px;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
     transition: background-color 0.3s ease, transform 0.3s ease;
 }
@@ -68,25 +77,29 @@
     background-color: #5a3cb5;
     transform: scale(1.15); /* Powiększenie przycisku przy najechaniu */
 }
+.game-button:disabled {
+    background: linear-gradient(135deg, #b0b0b0, #d4d4d4);
+    color: #7f7f7f;
+    cursor: not-allowed;
+    box-shadow: none;
+}
 
 .game-button:focus {
     outline: none;
     box-shadow: 0 0 0 3px rgba(106, 78, 197, 0.5);
 }
 .game-button-hint {
-    background: linear-gradient(135deg, #20067c, #8275ad);
+    background: linear-gradient(135deg, #050892, #1670a5);
     color: white;
-    border: none;
+    border: solid 3px #E3B14E;
     border-radius: 5px;
     padding: 10px 20px;
-    font-size: 16px;
+    font-size: 3vh;
     font-weight: bold;
     cursor: pointer;
     text-align: center;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
     transition: background-color 0.3s ease, transform 0.3s ease;
-
-   
     border-radius: 50px;
 }
 
@@ -98,4 +111,10 @@
 .game-button-hint:focus {
     outline: none;
     box-shadow: 0 0 0 3px rgba(106, 78, 197, 0.5);
+}
+.game-button-hint:disabled {
+    background: linear-gradient(135deg, #b0b0b0, #d4d4d4);
+    color: #7f7f7f;
+    cursor: not-allowed;
+    box-shadow: none;
 }
