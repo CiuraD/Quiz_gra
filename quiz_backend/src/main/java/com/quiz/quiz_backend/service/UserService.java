@@ -1,7 +1,5 @@
 package com.quiz.quiz_backend.service;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -21,8 +19,6 @@ public class UserService {
     private static final int RESPONSE_USER_NOT_FOUND = 494;
     private static final int RESPONSE_INVALID_PASSWORD = 884;
     private static final int RESPONSE_USER_NOT_ACTIVATED = 958;
-
-    private static final Logger logger = LoggerFactory.getLogger(UserService.class);
 
     private final BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 
@@ -44,7 +40,6 @@ public class UserService {
             return new LoggedUserDTO("", "", RESPONSE_USER_NOT_FOUND);
         }
 
-        //TODO Implement password hashing
         if (!bCryptPasswordEncoder.matches(loginDTO.getPassword(), user.getPassword())) {
             return new LoggedUserDTO("", "", RESPONSE_INVALID_PASSWORD);
         }
