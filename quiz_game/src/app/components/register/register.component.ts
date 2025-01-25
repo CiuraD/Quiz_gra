@@ -28,7 +28,7 @@ export class RegisterComponent {
         email: ['', [Validators.required, Validators.email]],
         password: [
           '',
-          [Validators.required, Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}')]
+          [Validators.required, Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*()])[A-Za-z\\d!@#$%^&*()]{8,}')]
         ],
         confirmPassword: ['', Validators.required],
       },
