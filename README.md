@@ -12,7 +12,7 @@
 
 ### Aby wszystko działało poprawnie przed pierwszym uruchomieniem aplikacji należy zainstalować wszystkie wymagane biblioteki React: 
 
-- Należy uruchomić konsolę (CMD)
-- Następnie przejść do katalogu z grą (np. cd C:\...\Quiz_gra\quiz_game)
-- Na końcu należy uruchomić instalowanie bibliotek (npm install)
-
+- Należy uruchomić konsolę (CMD) w katalogu "quiz_game"
+- Należy wprowadzić komendę `npm install`
+- Należy wprowadzić komendę `cd ..`
+- Należy uruchomić skrypt `Run.bat`
